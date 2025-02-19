@@ -7,12 +7,25 @@
     
     if($media <= 5){
         $resul = "Reprovado!";
+        echo "Nota 1: ", $nota1, "<br>";
+        echo "Nota 2: ", $nota2, "<br>";
+        echo "Nota 3: ", $nota3, "<br>";
+        echo "Nota Final (Pode ter sido arredondada): ", round($media), "<br>", $resul;
     }
-    else {
+    elseif ($media >= 5 and $media <= 10) {
         $resul = "Aprovado!";
+        echo "Nota 1: ", $nota1, "<br>";
+        echo "Nota 2: ", $nota2, "<br>";
+        echo "Nota 3: ", $nota3, "<br>";
+        echo "Nota Final (Pode ter sido arredondada): ", round($media), "<br>", $resul;
+    }
+    else{
+        echo "Nota 1: ", $nota1, "<br>";
+        echo "Nota 2: ", $nota2, "<br>";
+        echo "Nota 3: ", $nota3, "<br>";
+        echo "Não foi possível calcular a média.", "<br>";
     }
 
-    echo "Nota:", round($media), "<br>", $resul;
-
-
+    
+    
 ?>
