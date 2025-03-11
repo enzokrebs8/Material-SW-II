@@ -1,12 +1,9 @@
 <?php
-    $n = 1;
-    $n50 = 50;
     $soma = 0;
 
-    while ($soma <= 50) {
-        $n + $n50;
+    for ($i = 1; $i <= 50; $i++) {
+        $soma += $i;
     }
-    if ($soma = 1275){
-        echo "O valor da soma de n1 é $n";
-    }
+    
+    echo "A soma dos números de 1 a 50 é: " . $soma
 ?>
