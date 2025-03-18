@@ -1,0 +1,19 @@
+{
+    "produtos": [
+        {
+            "nome": "Iphone",
+            "pre\u00e7o": 3200,
+            "quantidade": 20
+        },
+        {
+            "nome": "Xiaomi",
+            "pre\u00e7o": 2300,
+            "quantidade": 20
+        },
+        {
+            "nome": "Samsung",
+            "pre\u00e7o": 2900,
+            "quantidade": 20
+        }
+    ]
+}
