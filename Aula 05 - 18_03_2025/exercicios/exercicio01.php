@@ -1,6 +1,6 @@
 <?php
 
-    $produtos = array('produtos' =>array(
+    $produtos = array(
         array(
             "nome"=>"Iphone",
             "preço"=>3200.00,
@@ -15,8 +15,11 @@
             "nome"=>"Samsung",
             "preço"=>2900.00, 
             "quantidade"=>20
-        )));
+        ));
 
-    $json = json_encode($produtos, JSON_PRETTY_PRINT);
-    file_put_contents("produtos.json", $json);
+        $json = json_encode($produtos);
+        file_put_contents('produtos.json', $json);
+
+        echo "Arquivo produtos.json criado!";
+        
 ?>
