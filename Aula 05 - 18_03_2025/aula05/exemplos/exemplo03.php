@@ -5,7 +5,7 @@
     '{"nome":"Heloysa", "idade":16, "sexo": "F"},'.
     '{"nome":"Pedro", "idade":17, "sexo": "M"}'.
     '],
-    "data": "24/11/2007"}';
+    "data": "23/03/2025"}';
 
     $jsonObj = json_decode($json_str);
 

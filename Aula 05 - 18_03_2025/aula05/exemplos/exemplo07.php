@@ -1,6 +1,6 @@
 <?php
     
-    $json_str = '{"nome":"Enzo Krebs", "idade":17, "sexo": M}';
+    $json_str = '{"nome":"Enzo Krebs", "idade":17, "sexo": M}'; //Valor M deveria estar "M"
 
     $obj = json_decode($json_str);
 

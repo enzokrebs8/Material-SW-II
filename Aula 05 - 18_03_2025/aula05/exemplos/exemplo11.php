@@ -7,4 +7,6 @@
     
     $json = json_encode($dados, JSON_PRETTY_PRINT);
     file_put_contents("dados2.json", $json);
+
+    echo "Produto: $dados[produto] salvo!"
 ?>
