@@ -118,10 +118,6 @@
             if ($encontrado) {
                 file_put_contents($arquivo, json_encode($usuarios, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
                 echo json_encode(["mensagem" => "Usuário excluído com sucesso!"], JSON_UNESCAPED_UNICODE);
-                echo json_encode([
-                    "mensagem" => "Usuário inserido com sucesso!",
-                    "usuário" => $novo_usuario
-                ], JSON_UNESCAPED_UNICODE);
     
             } else {
                 http_response_code(400);
@@ -161,36 +157,6 @@
             } else {
                 http_response_code(400);
                 echo json_encode(["erro" => "Usuário não encontrado para atualização."], JSON_UNESCAPED_UNICODE);
-            }
-            break;
-    
-        case 'DELETE':
-            if (!isset($_GET['id'])) {
-                http_response_code(400);
-                echo json_encode(["erro" => "ID não informado para exclusão."], JSON_UNESCAPED_UNICODE);
-                exit;
-            }
-    
-            $id = intval($_GET['id']);
-            $encontrado = false;
-    
-            foreach ($usuarios as $index => $usuario) {
-                if ($usuario['id'] == $id) {
-                    unset($usuarios[$index]);
-                    $usuarios = array_values($usuarios); // Reindexa o array
-                    $encontrado = true;
-                    break;
-                }
-            }
-    
-            if ($encontrado) {
-                file_put_contents($arquivo, json_encode($usuarios, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-                echo json_encode([
-                    "mensagem" => "Usuário excluído com sucesso!"
-                ], JSON_UNESCAPED_UNICODE);
-            } else {
-                http_response_code(400);
-                echo json_encode(["erro" => "Usuário não encontrado para exclusão."], JSON_UNESCAPED_UNICODE);
             }
             break;
         default:
