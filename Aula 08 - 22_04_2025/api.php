@@ -30,18 +30,18 @@
             // Verifica se há um parâmetro "id" na URL
             if(isset($_GET['id'])){
                 $id = intval($_GET['id']);
-                $usuario_encontrado = null;
+                $usuario_encontrado_id = null;
 
                 // Procura o usuário pelo ID
                 foreach ($usuarios as $usuario){
                     if ($usuario['id'] == $id){
-                        $usuario_encontrado = $usuario;
+                        $usuario_encontrado_id = $usuario;
                         break;
                     }
                 } 
                 
-                if($usuario_encontrado){
-                    echo json_encode($usuario_encontrado, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+                if($usuario_encontrado_id){
+                    echo json_encode($usuario_encontrado_id, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
                 } else { 
                     http_response_code(400);
                     echo json_encode(["erro" => "Usuário não encontrado."], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
@@ -95,6 +95,103 @@
             // array_push($usuarios, $novoUsuario);
             // echo json_encode("Usuário inserido com sucesso!");
             // print_r($usuarios);
+            break;
+        case 'DELETE':
+            if (!isset($_GET['id'])) {
+                http_response_code(400);
+                echo json_encode(["erro" => "ID não informado para exclusão."], JSON_UNESCAPED_UNICODE);
+                exit;
+            }
+
+            $id = intval($_GET['id']);
+            $encontrado = false;
+
+            foreach ($usuarios as $index => $usuario) {
+                if ($usuario['id'] == $id) {
+                    unset($usuarios[$index]);
+                    $usuarios = array_values($usuarios); // Reindexa o array
+                    $encontrado = true;
+                    break;
+                }
+            }
+
+            if ($encontrado) {
+                file_put_contents($arquivo, json_encode($usuarios, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+                echo json_encode(["mensagem" => "Usuário excluído com sucesso!"], JSON_UNESCAPED_UNICODE);
+                echo json_encode([
+                    "mensagem" => "Usuário inserido com sucesso!",
+                    "usuário" => $novo_usuario
+                ], JSON_UNESCAPED_UNICODE);
+    
+            } else {
+                http_response_code(400);
+                echo json_encode(["erro" => "Usuário não encontrado para exclusão."], JSON_UNESCAPED_UNICODE);
+            }
+            break;
+        case 'PUT':
+            $dados = json_decode(file_get_contents('php://input'), true);
+            if (!isset($_GET['id'])) {
+                http_response_code(400);
+                echo json_encode(["erro" => "ID não informado para atualização."], JSON_UNESCAPED_UNICODE);
+                exit;
+            }
+    
+            $id = intval($_GET['id']);
+            $usuario_atualizado = null;
+    
+            foreach ($usuarios as &$usuario) {
+                if ($usuario['id'] == $id) {
+                    if (isset($dados['nome'])) {
+                        $usuario['nome'] = $dados['nome'];
+                    }
+                    if (isset($dados['email'])) {
+                        $usuario['email'] = $dados['email'];
+                    }
+                    $usuario_atualizado = $usuario;
+                    break;
+                }
+            }
+    
+            if ($usuario_atualizado) {
+                file_put_contents($arquivo, json_encode($usuarios, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+                echo json_encode([
+                    "mensagem" => "Usuário atualizado com sucesso!",
+                    "usuário" => $usuario_atualizado
+                ], JSON_UNESCAPED_UNICODE);
+            } else {
+                http_response_code(400);
+                echo json_encode(["erro" => "Usuário não encontrado para atualização."], JSON_UNESCAPED_UNICODE);
+            }
+            break;
+    
+        case 'DELETE':
+            if (!isset($_GET['id'])) {
+                http_response_code(400);
+                echo json_encode(["erro" => "ID não informado para exclusão."], JSON_UNESCAPED_UNICODE);
+                exit;
+            }
+    
+            $id = intval($_GET['id']);
+            $encontrado = false;
+    
+            foreach ($usuarios as $index => $usuario) {
+                if ($usuario['id'] == $id) {
+                    unset($usuarios[$index]);
+                    $usuarios = array_values($usuarios); // Reindexa o array
+                    $encontrado = true;
+                    break;
+                }
+            }
+    
+            if ($encontrado) {
+                file_put_contents($arquivo, json_encode($usuarios, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+                echo json_encode([
+                    "mensagem" => "Usuário excluído com sucesso!"
+                ], JSON_UNESCAPED_UNICODE);
+            } else {
+                http_response_code(400);
+                echo json_encode(["erro" => "Usuário não encontrado para exclusão."], JSON_UNESCAPED_UNICODE);
+            }
             break;
         default:
             // echo "Método não encontrado :(";
