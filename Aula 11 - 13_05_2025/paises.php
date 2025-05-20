@@ -25,10 +25,13 @@
 <body>
     <h1>Países do Mundo</h1>
 
-    <form action="">
-        <input type="text" name="busca" placeholder="Digite o nome do país" value="<?php echo htmlspecialchars($busca); ?>">
-        <button type="submit">Buscar</button>
-    </form>
+    <center>
+        <form action="">
+            <input type="text" name="busca" placeholder="Digite o nome do país" value="<?php echo htmlspecialchars($busca); ?>">
+            <button type="submit">Buscar</button>
+        </form>
+        <br>
+    </center>
 
     <div class="container">
         <?php if (empty($paises)): ?>

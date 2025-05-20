@@ -31,3 +31,35 @@ h1{
     height: auto;
     margin-bottom: 10px;
 }
+
+form {
+    margin: 20px auto;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button{
+    padding: 10px 16px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.card p {
+            margin: 8px 0;
+        }
+
+        .erro {
+            color: red;
+            font-weight: bold;
+        }
